@@ -1,0 +1,59 @@
+<a  href="#categories/new" class="btn btn-primary">New Category</a>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Categories</h4>
+                <div class=clearfix></div>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><h5>Name</h5></th>
+                    <th><h5>Number of Tasks</h5></th>
+                    <th><h5>Total Weight</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,category) in instance.categories" ng-click="loadCategory(key)" style="cursor:pointer;">
+                    <td>{{category.name}}</td>
+                    <td>{{category.tasks.length}}</td>
+                    <td>{{category.total_weight}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12" >
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button class="btn btn-success pull-right" ng-click="editCategory(category)" ng-show="category_selected">Edit</button>
+                <button class="btn btn-danger pull-right" ng-click="deleteCategory(category)" ng-show="category_selected">Delete</button>
+                <h4>{{instance.categories[category].name}}</h4>
+                <div class=clearfix></div>
+            </div>
+            <table class=table ng-show="category_selected">
+                <thead>
+                <tr>
+                    <th><h5>Status</h5></th>
+                    <th><h5>Name</h5></th>
+                    <th><h5>Category</h5></th>
+                    <th><h5>Due Date</h5></th>
+                    <th><h5>Weight</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,task) in instance.categories[category].tasks" ng-click="loadTask(task.key)" style="cursor:pointer;">
+                    <td>{{task.status}}</td>
+                    <td>{{task.name}}</td>
+                    <td>{{task.category}}</td>
+                    <td>{{task.due_date}}</td>
+                    <td>{{task.weight}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

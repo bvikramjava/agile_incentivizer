@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="page-header">
+        <h2>{{title}}</h2>
+    </div>
+    <form role=form >
+        <div class="form-group">
+            <label for=name>Category Name</label>
+            <input type="text" class="form-control" ng-model="categories[category].name" id="name" placeholder="Enter Category Name">
+        </div>
+        <button type="submit" class="btn btn-default" ng-click="createCategory();" ng-hide="category_selected">Submit</button>
+        <button type="submit" class="btn btn-default" ng-click="updateCategory(category);" ng-show="category_selected">Save</button>
+    </form>
+</div>

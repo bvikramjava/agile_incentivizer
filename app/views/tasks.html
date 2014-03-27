@@ -1,0 +1,83 @@
+<a  href="#tasks/new" class="btn btn-primary">New Task</a>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Tasks</h4>
+                <div class=clearfix></div>
+            </div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group" style="width: 50%;">
+                        <input type="text" class="form-control" placeholder="Filter" ng-model="taskFilter">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="show_complete"> Show Complete Tasks
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><h5>Status</h5></th>
+                        <th><h5>Name</h5></th>
+                        <th><h5>Category</h5></th>
+                        <th><h5>Due Date</h5></th>
+                        <th><h5>Weight</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key,task) in instance.tasks|filter:taskFilter:strict" ng-click="loadTask(key)" style="cursor:pointer;">
+                        <td>{{task.status}}</td>
+                        <td>{{task.name}}</td>
+                        <td>{{task.category}}</td>
+                        <td>{{task.due_date}}</td>
+                        <td>{{task.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <div class="col-md-6 hidden-sm hidden-xs" ng-show="task">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Select a Task
+            </div>
+            <div class="panel-body">
+                <div class="">
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-sm-12 visible-sm visible-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Tasks
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><h5>Name</h5></th>
+                        <th><h5>Category</h5></th>
+                        <th><h5>Due Date</h5></th>
+                        <th><h5>Weight</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="(key,task) in instance.tasks" ng-click="loadTask(key)" style="cursor:pointer;">
+                        <td>{{task.name}}</td>
+                        <td>{{task.category}}</td>
+                        <td>{{task.due_date}}</td>
+                        <td>{{task.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

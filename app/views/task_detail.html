@@ -1,0 +1,84 @@
+<a  href="#tasks/new" class="btn btn-primary">New Task</a>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Tasks</h4>
+                <div class=clearfix></div>
+            </div>
+            <div class="panel-body">
+                <form class="form-inline">
+                    <div class="form-group" style="width: 50%;">
+                        <input type="text" class="form-control" placeholder="Filter" ng-model="task_filter">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" ng-model="show_complete"> Show Complete Tasks
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><h5>Status</h5></th>
+                        <th><h5>Name</h5></th>
+                        <th><h5>Category</h5></th>
+                        <th><h5>Due Date</h5></th>
+                        <th><h5>Weight</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,task) in instance.tasks | filter:task_filter" ng-click="loadTask(key)" style="cursor:pointer;">
+                    <td>{{task.status}}</td>
+                        <td>{{task.name}}</td>
+                        <td>{{task.category}}</td>
+                        <td>{{task.due_date}}</td>
+                        <td>{{task.weight}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-12" ng-show="task">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button class="btn btn-success pull-right" ng-click="editTask(task)" ng-show="task_selected">Edit</button>
+                <button class="btn btn-danger pull-right" ng-click="deleteTask(task)" ng-show="task_selected">Delete</button>
+                <button class="btn btn-info pull-right" ng-click="completeTask(task)" ng-show="tasks[task].status=='Open' && tasks[task].approved">Complete</button>
+                <h4>{{instance.tasks[task].name}}</h4>
+                <div class=clearfix></div>
+            </div>
+            <div class="panel-body">
+                <p>{{instance.tasks[task].description}}</p>
+            </div>
+            <table class=table ng-show="task_selected">
+                <tr>
+                    <th>Date Due</th>
+                    <td>{{instance.tasks[task].due_date}}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>{{instance.tasks[task].status}}</td>
+                </tr>
+                <tr>
+                    <th>Category</th>
+                    <td><a ng-click="loadCategory(instance.tasks[task].category)">{{instance.tasks[task].category}}</a></td>
+                </tr>
+                <tr>
+                    <th>Weight</th>
+                    <td>{{instance.tasks[task].weight}}</td>
+                </tr>
+                <tr>
+                    <th>Approval Status</th>
+                    <td>
+                        <span class="glyphicon glyphicon-ok" ng-show="instance.tasks[task].approved" title="Approved"></span>
+                        <span class="glyphicon glyphicon-question-sign" ng-hide="instance.tasks[task].approved" title="Pending Approval"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

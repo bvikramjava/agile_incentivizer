@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app='agileApp'>
+    <head>
+        <title>Agile Incentivizer</title>
+        <link href='assets/css/bootstrap.css' rel=stylesheet>
+    </head>
+    <body style='padding:70px 5px;'>
+        <header role=banner>
+            <div class='navbar navbar-fixed-top navbar-default' role=navigation>
+                <div class='navbar-header'>
+                    <a class='navbar-brand' href='/agile_incentivizer/' title='Agile Incentivizer'>
+                        Agile Incentivizer
+                    </a>
+                </div>
+                <div class='collapse navbar-collapse navbar-responsive-collapse'>
+                    <ul class='nav navbar-nav'>
+                        <li><a href='#tasks'>Tasks</a></li>
+                        <li><a href='#categories'>Categories</a></li>
+                        <li><a href='#rewards'>Rewards</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div ng-view="">
+            
+        </div>
+        <!--Scripts-->
+        <!--Libraries-->
+        <script src='assets/js/angular.js'></script>
+        <script src="https://cdn.firebase.com/js/client/1.0.6/firebase.js"></script>
+        <script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+ 
+        
+        <!--Application-->
+        <script src='app/app.js'></script>
+        <script src='app/controllers/controllers.js'></script>
+        <script src='app/services/services.js'></script>
+        <script src=app/directives/directives.js></script>
+    </body>
+</html>

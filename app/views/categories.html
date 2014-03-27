@@ -1,0 +1,67 @@
+<a  href="#categories/new" class="btn btn-primary">New Category</a>
+<br>
+<br>
+<div class="row">
+    <div class="col-md-6 hidden-sm hidden-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>Categories</h4>
+                <div class=clearfix></div>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><h5>Name</h5></th>
+                    <th><h5>Number of Tasks</h5></th>
+                    <th><h5>Total Weight</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,category) in instance.categories" ng-click="loadCategory(key)" style="cursor:pointer;">
+                    <td>{{category.name}}</td>
+                    <td>{{category.tasks.length}}</td>
+                    <td>{{category.total_weight}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6 hidden-sm hidden-xs" ng-show="category">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Select a Category
+            </div>
+            <div class="panel-body">
+                <div class="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 visible-sm visible-xs">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Categories
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><h5>Name</h5></th>
+                    <th><h5>Category</h5></th>
+                    <th><h5>Due Date</h5></th>
+                    <th><h5>Weight</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,category) in instance.categories" ng-click="loadCategory(key)" style="cursor:pointer;">
+                    <td>{{category.name}}</td>
+                    <td>{{category.category}}</td>
+                    <td>{{category.due_date}}</td>
+                    <td>{{category.weight}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

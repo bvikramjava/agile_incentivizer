@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-lg-2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Stats
+            </div>
+            <table class="table">
+                <tr>
+                    <th><h5>Points</h5></th>
+                    <td>{{instance.account.points}}</td>
+                </tr>
+                <tr>
+                    <th><h5>Total Approved Points</h5></th>
+                    <td>{{total}}</td>
+                </tr>
+                <tr>
+                    <th><h5>Remaining Approved Points</h5></th>
+                    <td>{{remaining}}</td>
+                </tr>
+                <tr>
+                    <th><h5>Points Pending Approval</h5></th>
+                    <td>{{pending}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="panel panel-default" ng-show="instance.account.rewards">
+            <div class="panel-heading">
+                Earned Rewards
+            </div>
+            <table class="table">
+                <tr ng-repeat="reward in instance.account.rewards">
+                    <td>{{reward.name}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-5 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="#tasks">Tasks</a>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><h5>Status</h5></th>
+                    <th><h5>Name</h5></th>
+                    <th><h5>Category</h5></th>
+                    <th><h5>Due Date</h5></th>
+                    <th><h5>Weight</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,task) in instance.tasks" ng-click="loadTask(key)" style="cursor:pointer;">
+                    <td>{{task.status}}</td>
+                    <td>{{task.name}}</td>
+                    <td>{{task.category}}</td>
+                    <td>{{task.due_date}}</td>
+                    <td>{{task.weight}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-lg-5 col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="#categories">Categories</a>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><h5>Name</h5></th>
+                    <th><h5>Number of Tasks</h5></th>
+                    <th><h5>Total Weight</h5></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(key,category) in instance.categories" ng-click="loadCategory(key)" style="cursor:pointer;">
+                    <td>{{category.name}}</td>
+                    <td>{{category.tasks.length}}</td>
+                    <td>{{category.total_weight}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
