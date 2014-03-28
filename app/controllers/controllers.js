@@ -99,6 +99,16 @@ app.controller('TaskController', function($scope, $location, taskService, catego
         });
         $location.path('/tasks/detail/' + id);
     };
+
+    $scope.completeFilter = function(itask){
+        if ($scope.show_complete){
+            return itask.status == "Open";
+        }else {
+            return true;
+        }
+
+
+    };
     
 });
 

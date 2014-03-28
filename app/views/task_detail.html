@@ -11,7 +11,7 @@
             <div class="panel-body">
                 <form class="form-inline">
                     <div class="form-group" style="width: 50%;">
-                        <input type="text" class="form-control" placeholder="Filter" ng-model="task_filter">
+                        <input type="text" class="form-control" placeholder="Filter" ng-model="taskFilter">
                     </div>
                     <div class="checkbox">
                         <label>
@@ -31,13 +31,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="(key,task) in instance.tasks | filter:task_filter" ng-click="loadTask(key)" style="cursor:pointer;">
+                <tr ng-repeat="task in tasks| orderByPriority |filter:taskFilter | filter:completeFilter" ng-click="loadTask(task.$id)" style="cursor:pointer;">
                     <td>{{task.status}}</td>
-                        <td>{{task.name}}</td>
-                        <td>{{task.category}}</td>
-                        <td>{{task.due_date}}</td>
-                        <td>{{task.weight}}</td>
-                    </tr>
+                    <td>{{task.name}}</td>
+                    <td>{{task.category}}</td>
+                    <td>{{task.due_date}}</td>
+                    <td>{{task.weight}}</td>
+                </tr>
                 </tbody>
             </table>
         </div>
