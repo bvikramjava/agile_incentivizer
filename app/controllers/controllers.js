@@ -20,6 +20,9 @@ app.controller('HomeController', function($scope, $location, instanceService){
                 }
             })
         });
+        $scope.total = 0;
+        $scope.remaining = 0;
+        $scope.pending = 0;
         angular.forEach($scope.instance.tasks, function(t){
             if (t.approved){
                 $scope.total += t.weight;
@@ -174,7 +177,9 @@ app.controller('CategoryController', function($scope, $location, taskService, ca
             delete $scope.categories["new"];
             $location.path('/categories');
         });
+        $location.path('/categories');
     };
+
 
     $scope.updateCategory = function(id){
         $scope.categories.$save(id).then(function(id){
@@ -182,8 +187,9 @@ app.controller('CategoryController', function($scope, $location, taskService, ca
         });
     };
 });
-app.controller('RewardController', function($scope, $location, rewardService, categoryService, instanceService) {
+app.controller('RewardController', function($scope, $location, rewardService, categoryService, instanceService, accountService) {
     $scope.instance = instanceService;
+    $scope.account = accountService;
     $scope.rewards = rewardService;
     $scope.cart = [];
     $scope.total = 0;
@@ -192,9 +198,11 @@ app.controller('RewardController', function($scope, $location, rewardService, ca
 
     $scope.addToCart = function(id){
         $scope.cart.push(angular.copy($scope.rewards[id]));
+        $scope.checkCart();
     };
     $scope.removeFromCart = function(item){
         $scope.cart.splice($scope.cart.indexOf(item),1);
+        $scope.checkCart();
     };
     $scope.totalCart = function(){
         var total = 0;
@@ -202,6 +210,20 @@ app.controller('RewardController', function($scope, $location, rewardService, ca
             total += parseInt(item.cost);
         });
         return total;
+    };
+    $scope.purchasable = false;
+    $scope.insufficent = false;
+    $scope.checkCart = function(){
+        if (parseInt($scope.instance.account.points) - $scope.totalCart() < 0 && self.totalCart()){
+            $scope.insufficent = true;
+            $scope.purchasable = false;
+        }else if($scope.totalCart() == 0){
+            $scope.insufficent = false;
+            $scope.purchasable = false;
+        }else{
+            $scope.insufficent = false;
+            $scope.purchasable = true;
+        }
     };
     $scope.instance.$on('loaded', function(){
         angular.forEach($scope.instance.tasks, function(t){
@@ -217,8 +239,8 @@ app.controller('RewardController', function($scope, $location, rewardService, ca
     });
     $scope.purchase = function(){
         angular.forEach($scope.cart, function(item){
-            $scope.instance.account.points = parseInt($scope.instance.account.points) - parseInt(item.weight);
-            $scope.instance.$save('account');
+            $scope.account.points = parseInt($scope.account.points) - parseInt(item.cost);
+            $scope.account.$save('points');
             if (!$scope.instance.account.hasOwnProperty('rewards')){
                 $scope.instance.account['rewards'] = [];
             }

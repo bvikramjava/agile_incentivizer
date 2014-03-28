@@ -97,8 +97,8 @@
                 </tbody>
             </table>
             <div class="panel-footer">
-                <button class="btn btn-danger pull-right" disabled ng-show="instance.account.points - totalCart() < 0">Insufficient Funds</button>
-                <button class="btn btn-success pull-right" ng-click="purchase()" ng-show="instance.account.points - totalCart() >= 0 && cart">Purchase</button>
+                <button class="btn btn-danger pull-right" disabled ng-show="insufficent">Insufficient Funds</button>
+                <button class="btn btn-success pull-right" ng-click="purchase()" ng-show="purchasable">Purchase</button>
                 <div class="clearfix"></div>
             </div>
         </div>

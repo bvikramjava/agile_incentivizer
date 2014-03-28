@@ -17,3 +17,8 @@ app.factory("rewardService", ["$firebase", function($firebase) {
     var ref = new Firebase("https://luminous-fire-9343.firebaseio.com/rewards");
     return $firebase(ref);
 }]);
+
+app.factory("accountService", ["$firebase", function($firebase) {
+    var ref = new Firebase("https://luminous-fire-9343.firebaseio.com/account");
+    return $firebase(ref);
+}]);
